@@ -2,12 +2,21 @@ import type { Component } from 'solid-js';
 
 import styles from './App.module.css';
 import { NavLink, Route, Routes } from 'solid-app-router';
-import { lazy } from 'solid-js';
+import { lazy, onMount } from 'solid-js';
 import useSuspense from './useSuspense';
+
 const Binary = lazy(() => import('./Binary'));
 const Powers = lazy(() => import('./Powers'));
 
+import init  from 'ct2-calculator';
+
 const App: Component = () => {
+  onMount(() => {
+    init().then(() => {
+      console.log('init done');
+    });
+  });
+
   return (
     <div class={`container ${styles.App}`}>
       <div class="container-fluid">
