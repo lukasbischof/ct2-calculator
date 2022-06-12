@@ -52,6 +52,8 @@ dependencies = [
  "console_error_panic_hook",
  "num-bigint 0.4.3",
  "num-format",
+ "num-integer",
+ "num-traits",
  "wasm-bindgen",
  "wee_alloc",
 ]
