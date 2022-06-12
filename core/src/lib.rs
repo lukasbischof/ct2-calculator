@@ -2,13 +2,11 @@ extern crate wasm_bindgen;
 extern crate num_bigint;
 extern crate num_format;
 extern crate num_traits;
-extern crate num_integer;
 
 use wasm_bindgen::prelude::*;
 use num_format::{Locale, ToFormattedString};
 use num_bigint::BigInt;
 use num_traits::Num;
-use num_integer::Integer;
 
 mod big_int;
 mod left_pad;
@@ -75,7 +73,7 @@ pub fn hex_to_bin(input: &str) -> Option<String> {
         let binary_string = x.unwrap().to_str_radix(2);
 
         if binary_string.len() > 4 {
-            Some(format_binary_string(&binary_string))
+            Some(fmt_binary_string(&binary_string, true))
         } else {
             Some(format!("{:0>4}", binary_string))
         }
@@ -84,18 +82,31 @@ pub fn hex_to_bin(input: &str) -> Option<String> {
     }
 }
 
-fn format_binary_string(binary_string: &String) -> String {
+fn fmt_binary_string(binary_string: &String, pad_str: bool) -> String {
     const BITS_PER_GROUP: usize = 4;
 
-    let str_len = binary_string.len();
-    let pad_len = str_len + ((BITS_PER_GROUP - (str_len % BITS_PER_GROUP)) % BITS_PER_GROUP);
-    let padded_string = left_pad_with(binary_string, pad_len, '0').to_string();
+    let padded_string = if pad_str {
+        let str_len = binary_string.len();
+        let pad_len = str_len + ((BITS_PER_GROUP - (str_len % BITS_PER_GROUP)) % BITS_PER_GROUP);
+        left_pad_with(binary_string, pad_len, '0').to_string()
+    } else {
+        binary_string.clone()
+    };
+
     let mut output = String::from("");
 
-    for i in 0..(padded_string.len() / BITS_PER_GROUP) {
-        output.push(' ');
-        output.push_str(&padded_string[(i * BITS_PER_GROUP)..((i + 1) * BITS_PER_GROUP)]);
+    for (i, c) in padded_string.chars().enumerate() {
+        if i > 0 && i % BITS_PER_GROUP == 0 {
+            output.push(' ');
+        }
+        output.push(c);
     }
 
     output.trim_start().to_string()
+}
+
+#[wasm_bindgen]
+pub fn format_binary_string(string: String, pad_str: bool) -> String {
+    let compact_str: String = string.chars().filter(|c| !c.is_whitespace()).collect();
+    fmt_binary_string(&compact_str, pad_str)
 }
