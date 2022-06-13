@@ -1,0 +1,5 @@
+import{d as m,s as $,c as b,t as g,a as h,i as u,b as p,e as x,f as v,g as C,h as y}from"./index.a8ce455f.js";const B=g("<textarea></textarea>"),f=({value:t,onChange:i,...a})=>(()=>{const n=B.cloneNode(!0);return n.$$input=l=>i(a.preprocess?a.preprocess(l.currentTarget.value):l.currentTarget.value),$(n,a,!1,!1),b(()=>n.value=typeof t=="function"?t():t),n})();m(["input"]);const H=g('<div><h1>Bin\xE4r/Hex</h1><div class="row"><div class="col-md-6"><h3>Bin\xE4r</h3></div><div class="col-md-6"><h3>Hex</h3></div></div></div>'),c=t=>t.split(`
+`),S=()=>{const[t,i]=h("0"),[a,n]=h("0x0"),l=e=>{const r=c(e).map(s=>v(s)||"0x0").join(`
+`);i(c(e).map(s=>C(s,!1)).join(`
+`)),n(r)},_=e=>{const r=c(e).map(s=>y(s)||"0").join(`
+`);n(e),i(r)};return(()=>{const e=H.cloneNode(!0),r=e.firstChild,s=r.nextSibling,o=s.firstChild;o.firstChild;const d=o.nextSibling;return d.firstChild,u(o,p(f,{get class(){return x.code},value:t,onChange:l,placeholder:"Bin\xE4r"}),null),u(d,p(f,{get class(){return x.code},value:a,onChange:_,placeholder:"Hex"}),null),e})()};export{S as default};

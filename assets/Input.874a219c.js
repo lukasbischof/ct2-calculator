@@ -1,0 +1,1 @@
+import{d as s,s as c,c as u,t as o}from"./index.a8ce455f.js";const p=o("<input>");function l({value:t,onChange:a,...r}){return(()=>{const e=p.cloneNode(!0);return e.$$input=n=>{a(r.preprocess?r.preprocess(n.currentTarget.value):n.currentTarget.value)},c(e,r,!1,!1),u(()=>e.value=typeof t=="function"?t():t),e})()}s(["input"]);export{l as I};
