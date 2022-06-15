@@ -29,3 +29,4 @@ wee_alloc = { version = "0.4.5", optional = true }
 
 [profile.release]
 opt-level = "s"
+lto = true

@@ -1,6 +1,6 @@
 import { Component, createMemo, createSignal } from 'solid-js';
-import { power2 } from 'ct2-calculator';
 import Input from './Input';
+import { power2 } from 'ct2-calculator';
 
 const Powers: Component = () => {
   const [value, setValue] = createSignal(0);

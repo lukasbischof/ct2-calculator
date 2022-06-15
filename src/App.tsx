@@ -9,6 +9,7 @@ import init from 'ct2-calculator';
 const Binary = lazy(() => import('./Binary'));
 const Powers = lazy(() => import('./Powers'));
 const TimeCalculator = lazy(() => import('./TimeCalculator'));
+const TimerCounter = lazy(() => import('./TimerCounterCalculator'));
 
 const App: Component = () => {
   const [isReady, setIsReady] = createSignal(false);
@@ -26,6 +27,7 @@ const App: Component = () => {
           <NavLink class="flex-sm-fill text-sm-center nav-link" href="/powers">Potenzen</NavLink>
           <NavLink class="flex-sm-fill text-sm-center nav-link" href="/bin">Binär/Hex</NavLink>
           <NavLink class="flex-sm-fill text-sm-center nav-link" href="/time">Zeit</NavLink>
+          <NavLink class="flex-sm-fill text-sm-center nav-link" href="/counter-timer">Timer/Counter</NavLink>
         </nav>
 
         <Show when={isReady}>
@@ -34,6 +36,7 @@ const App: Component = () => {
             <Route path="/powers" element={useSuspense(Powers)}></Route>
             <Route path="/bin" element={useSuspense(Binary)}></Route>
             <Route path="/time" element={useSuspense(TimeCalculator)}></Route>
+            <Route path="/counter-timer" element={useSuspense(TimerCounter)}></Route>
           </Routes>
         </Show>
       </div>

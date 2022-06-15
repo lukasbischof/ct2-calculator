@@ -1,17 +1,7 @@
 import { Component, createSignal, onCleanup } from 'solid-js';
 import { Time, TimeConversion } from 'ct2-calculator/ct2_calculator';
 import Input from './Input';
-
-function FormRow({ label, labelFor, children }: { label: string, labelFor: string, children: any }) {
-  return (
-    <div class="row mb-3">
-      <label for={labelFor} class="col-sm-2 col-form-label">{label}</label>
-      <div class="col-sm-10">
-        {children}
-      </div>
-    </div>
-  );
-}
+import { FormRow } from './FormRow';
 
 const TimeCalculator: Component = () => {
   const [time, setTime] = createSignal<TimeConversion>(TimeConversion.new(Time.from_seconds(0)));
