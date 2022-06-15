@@ -23,7 +23,7 @@ function Input<T>({ value, onChange, ...props }: Props<T> & OtherProps) {
   };
 
   return (
-    <input value={typeof value === 'function' ? value() : value}
+    <input type='text' autocomplete="off" value={typeof value === 'function' ? value() : value}
            onInput={v => {
              onChange(preprocess(v.currentTarget.value) as unknown as T);
            }}

@@ -8,7 +8,7 @@ type Props = {
   preprocess?: (value: string) => any,
 };
 
-const Input: Component<Props & OtherProps> = ({ value, onChange, ...props }) => (
+const Textarea: Component<Props & OtherProps> = ({ value, onChange, ...props }) => (
   <textarea
     value={typeof value === 'function' ? value() : value}
     onInput={v => onChange(props.preprocess ? props.preprocess(v.currentTarget.value) : v.currentTarget.value)}
@@ -16,4 +16,4 @@ const Input: Component<Props & OtherProps> = ({ value, onChange, ...props }) => 
   />
 );
 
-export default Input;
+export default Textarea;

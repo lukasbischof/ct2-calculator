@@ -13,7 +13,10 @@ pub fn hex_to_bin(input: &str) -> Option<String> {
         return Some(String::from(""));
     }
 
-    let hex = input.replace(" ", "").replace("0x", "").replace("'", "");
+    let hex = input
+        .replace(" ", "")
+        .replace("0x", "")
+        .replace("'", "");
 
     let x = BigInt::from_str_radix(hex.as_str(), 16);
     if x.is_ok() {
@@ -71,6 +74,10 @@ fn fmt_binary_string(binary_string: &String, pad_str: bool) -> String {
 
 #[wasm_bindgen]
 pub fn format_binary_string(string: String, pad_str: bool) -> String {
-    let compact_str: String = string.chars().filter(|c| !c.is_whitespace()).collect();
+    let compact_str: String = string
+        .chars()
+        .filter(|c| !c.is_whitespace())
+        .collect();
+
     fmt_binary_string(&compact_str, pad_str)
 }

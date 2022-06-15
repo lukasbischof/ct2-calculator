@@ -9,9 +9,7 @@ const Spinner: Component = () => {
   return (
     <div class="d-flex justify-content-center mt-4">
       <Show when={isVisible()}>
-        <div class="spinner-border" role="status">
-          <span class="visually-hidden">Loading...</span>
-        </div>
+        <div class="spinner-border" role="status"><span class="visually-hidden">Loading...</span></div>
       </Show>
     </div>
   );

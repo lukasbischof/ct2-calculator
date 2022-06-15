@@ -21,10 +21,7 @@ const TimerCounterCalculator: Component = () => {
       <form>
         <FormRow label="Eingabefrequenz" labelFor={'hertz'}>
           <div class="input-group">
-            <Input type="number"
-                   autocomplete="off"
-                   class="form-control"
-                   id="hertz"
+            <Input type="number" class="form-control" id="hertz"
                    value={() => timerCounter().input_frequency}
                    preprocess={parseInt}
                    onChange={(change) => handleChange('updated_input_frequency', change)} />
@@ -38,10 +35,7 @@ const TimerCounterCalculator: Component = () => {
           </button>
         </FormRow>
         <FormRow label="Prescaler" labelFor={'prescaler'}>
-          <Input type="number"
-                 autocomplete="off"
-                 class="form-control"
-                 id="prescaler"
+          <Input type="number" class="form-control" id="prescaler"
                  value={() => timerCounter().prescaler}
                  preprocess={parseInt}
                  onChange={(change) => handleChange('updated_prescaler', change)} />
@@ -49,11 +43,7 @@ const TimerCounterCalculator: Component = () => {
         <hr />
         <FormRow label="= Prescaled Frequency" labelFor="prescaled_frequency">
           <div class="input-group">
-            <Input
-              class="form-control"
-              type="text"
-              autocomplete="off"
-              id="prescaled_frequency"
+            <Input class="form-control" type="text" id="prescaled_frequency"
               value={() => timerCounter().prescaled_frequency()}
               preprocess={parseInt}
               onChange={(change) => handleChange('updated_prescaled_frequency', change)} />
@@ -64,10 +54,7 @@ const TimerCounterCalculator: Component = () => {
           </div>
         </FormRow>
         <FormRow label="Auto Reload Register ARR" labelFor={'arr'}>
-          <Input type="number"
-                 autocomplete="off"
-                 class="form-control"
-                 id="arr"
+          <Input type="number" class="form-control" id="arr"
                  value={() => timerCounter().arr}
                  preprocess={parseInt}
                  onChange={(change) => handleChange('updated_arr', change)} />
@@ -78,11 +65,7 @@ const TimerCounterCalculator: Component = () => {
           <div class="row">
             <div class="col-6">
               <div class="input-group">
-                <Input
-                  class="form-control"
-                  type="text"
-                  autocomplete="off"
-                  id="interrupt_period"
+                <Input class="form-control" type="text" id="interrupt_period"
                   value={() => timerCounter().interrupt_period_ms()}
                   preprocess={parseInt}
                   onChange={(change) => {
@@ -96,11 +79,7 @@ const TimerCounterCalculator: Component = () => {
             </div>
             <div class="col-6">
               <div class="input-group">
-                <Input
-                  class="form-control"
-                  type="text"
-                  autocomplete="off"
-                  id="interrupt_period"
+                <Input class="form-control" type="text" id="interrupt_period"
                   value={() => timerCounter().interrupt_frequency()}
                   preprocess={parseInt}
                   onChange={(change) => {

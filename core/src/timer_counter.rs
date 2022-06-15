@@ -49,8 +49,10 @@ impl TimerCounter {
     }
 
     pub fn updated_interrupt_period(&self, interrupt_period_ms: u32) -> Self {
-        let prescaler_time = Time::from_hertz(self.prescaled_frequency() as f64).milliseconds();
-        let x = interrupt_period_ms as f64 / prescaler_time;
+        let prescaler_time = Time::from_hertz(
+            self.prescaled_frequency() as f64
+        );
+        let x = interrupt_period_ms as f64 / prescaler_time.milliseconds();
 
         self.updated_arr(x as u32)
     }

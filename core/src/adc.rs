@@ -59,8 +59,13 @@ impl ADCTiming {
 
     pub fn total_time(&self) -> Time {
         let input_freq = Time::from_hertz(self.prescaled_frequency() as f64);
+        let conversion_cycles = (self.sample_time_cycles + self.conversion_time_cycles) as f64;
         Time::from_microseconds(
-            (self.sample_time_cycles + self.conversion_time_cycles) as f64 * input_freq.microseconds()
+            conversion_cycles * input_freq.microseconds()
         )
+    }
+
+    pub fn sample_rate(&self) -> f64 {
+        1.0 / self.total_time().seconds()
     }
 }

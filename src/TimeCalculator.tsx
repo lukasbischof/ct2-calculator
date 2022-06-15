@@ -17,52 +17,37 @@ const TimeCalculator: Component = () => {
       <h1>Zeitrechner</h1>
       <form>
         <FormRow label="Sekunden" labelFor={'seconds'}>
-          <Input<string> type="text"
-                         step="0.00000000001"
-                         class="form-control"
-                         id="seconds"
+          <Input<string> class="form-control" id="seconds"
                          value={() => time().seconds()}
                          onChange={(change) => convert('seconds', change)} />
         </FormRow>
         <FormRow label="Millisekunden" labelFor="milliseconds">
-          <Input<string> type="text"
-                         class="form-control"
-                         id="milliseconds"
+          <Input<string> class="form-control" id="milliseconds"
                          value={() => time().milliseconds()}
                          onChange={change => convert('milliseconds', change)} />
         </FormRow>
         <FormRow label="Mikrosekunden" labelFor="microseconds">
-          <Input<string> type="text"
-                         class="form-control"
-                         id="microseconds"
+          <Input<string> class="form-control" id="microseconds"
                          value={() => time().microseconds()}
                          onChange={change => convert('microseconds', change)} />
         </FormRow>
         <FormRow label="Nanosekunden" labelFor="nanoseconds">
-          <Input<string> type="text"
-                         class="form-control"
-                         id="nanoseconds"
+          <Input<string> class="form-control" id="nanoseconds"
                          value={() => time().nanoseconds()}
                          onChange={change => convert('nanoseconds', change)} />
         </FormRow>
         <FormRow label="Hertz" labelFor="hertz">
-          <Input<string> type="text"
-                         class="form-control"
-                         id="hertz"
+          <Input<string> class="form-control" id="hertz"
                          value={() => time().hertz()}
                          onChange={change => convert('hertz', change)} />
         </FormRow>
         <FormRow label="Kilohertz" labelFor="kilohertz">
-          <Input<string> type="text"
-                         class="form-control"
-                         id="kilohertz"
+          <Input<string> class="form-control" id="kilohertz"
                          value={() => time().kilohertz()}
                          onChange={change => convert('kilohertz', change)} />
         </FormRow>
         <FormRow label="Megahertz" labelFor="megahertz">
-          <Input<string> type="text"
-                         class="form-control"
-                         id="megahertz"
+          <Input<string> class="form-control" id="megahertz"
                          value={() => time().megahertz()}
                          onChange={change => convert('megahertz', change)} />
         </FormRow>
