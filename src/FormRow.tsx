@@ -1,4 +1,6 @@
-type Props = { label: string, labelFor: string, children: any };
+import { JSX } from 'solid-js';
+
+type Props = { label: string | JSX.Element, labelFor: string, children: any };
 
 export function FormRow({ label, labelFor, children }: Props) {
   return (

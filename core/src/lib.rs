@@ -11,6 +11,7 @@ mod left_pad;
 mod power;
 mod time;
 mod timer_counter;
+mod adc;
 
 use crate::left_pad::left_pad_with;
 

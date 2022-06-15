@@ -33,13 +33,8 @@ const TimerCounterCalculator: Component = () => {
           <div
             class="form-text mb-1">{`= ${inputFrequencyConversion().megahertz()} MHz, ${inputFrequencyConversion().kilohertz()} kHz`}</div>
           <button class="btn btn-outline-dark btn-sm me-1"
-                  onclick={() => handleChange('updated_input_frequency', 1e6)}>1 MHz
-          </button>
-          <button class="btn btn-outline-dark btn-sm me-1"
-                  onclick={() => handleChange('updated_input_frequency', 2e6)}>2 MHz
-          </button>
-          <button class="btn btn-outline-dark btn-sm me-1"
-                  onclick={() => handleChange('updated_input_frequency', 5e6)}>5 MHz
+                  onclick={() => handleChange('updated_input_frequency', timerCounter().input_frequency * 1e6)}>
+            MHz
           </button>
         </FormRow>
         <FormRow label="Prescaler" labelFor={'prescaler'}>
