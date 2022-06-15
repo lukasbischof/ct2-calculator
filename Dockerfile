@@ -12,7 +12,7 @@ FROM node:18.3.0-alpine AS web-build
 RUN npm i -g pnpm
 WORKDIR /usr/src
 COPY . .
-RUN pnpm install
 COPY --from=wasm-build /usr/src/core/pkg ./core/pkg
+RUN pnpm install
 
 RUN pnpm run build
