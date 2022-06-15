@@ -2,11 +2,11 @@ extern crate num_bigint;
 extern crate num_format;
 extern crate num_traits;
 
-use wasm_bindgen::prelude::*;
-use num_format::{Locale, ToFormattedString};
-use num_bigint::BigInt;
-use num_traits::Num;
 use crate::big_int::BigIntToFormattedString;
+use num_bigint::BigInt;
+use num_format::{Locale, ToFormattedString};
+use num_traits::Num;
+use wasm_bindgen::prelude::*;
 
 #[wasm_bindgen]
 pub fn power2(exp: u32) -> String {

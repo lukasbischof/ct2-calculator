@@ -1,6 +1,6 @@
-use wasm_bindgen::prelude::*;
 use crate::log;
 use regex::Regex;
+use wasm_bindgen::prelude::*;
 
 /*
 hiding really ugly code in a WASM module, check!!
@@ -20,11 +20,15 @@ const MEGAHERTZ: f64 = 1_000_000.0;
 #[wasm_bindgen]
 impl Time {
     pub fn from_seconds(seconds: f64) -> Self {
-        Self { microseconds: seconds * STEP2 }
+        Self {
+            microseconds: seconds * STEP2,
+        }
     }
 
     pub fn from_milliseconds(milliseconds: f64) -> Self {
-        Self { microseconds: milliseconds * STEP }
+        Self {
+            microseconds: milliseconds * STEP,
+        }
     }
 
     pub fn from_microseconds(microseconds: f64) -> Self {
@@ -32,17 +36,17 @@ impl Time {
     }
 
     pub fn from_nanoseconds(nanoseconds: f64) -> Self {
-        Self { microseconds: nanoseconds / STEP }
+        Self {
+            microseconds: nanoseconds / STEP,
+        }
     }
 
     pub fn from_hertz(hertz: f64) -> Self {
         Self::from_seconds(1.0 / hertz)
     }
-
     pub fn from_kilohertz(kilohertz: f64) -> Self {
         Self::from_milliseconds(1.0 / kilohertz)
     }
-
     pub fn from_megahertz(megahertz: f64) -> Self {
         Self::from_microseconds(1.0 / megahertz)
     }
@@ -100,7 +104,11 @@ impl TimeConversion {
 
     pub fn update(&self, field: &str, value: &str) -> TimeConversion {
         let value_float = Self::parse_input(value);
-        log(&format!("parsed: {}, raw: {}", value_float.unwrap_or_default(), value));
+        log(&format!(
+            "parsed: {}, raw: {}",
+            value_float.unwrap_or_default(),
+            value
+        ));
 
         if value_float.is_ok() {
             let time = match field {
@@ -111,20 +119,49 @@ impl TimeConversion {
                 "hertz" => Time::from_hertz(value_float.unwrap()),
                 "kilohertz" => Time::from_kilohertz(value_float.unwrap()),
                 "megahertz" => Time::from_megahertz(value_float.unwrap()),
-                _ => { Time::from_seconds(0.0) }
+                _ => Time::from_seconds(0.0),
             };
             log(&format!("time: {:?}", time));
             return Self::new(&time);
         }
 
+        // todo: Remove repetition
         Self {
-            seconds: if field == "seconds" { value.to_string() } else { self.seconds.clone() },
-            milliseconds: if field == "milliseconds" { value.to_string() } else { self.milliseconds.clone() },
-            microseconds: if field == "microseconds" { value.to_string() } else { self.microseconds.clone() },
-            nanoseconds: if field == "nanoseconds" { value.to_string() } else { self.nanoseconds.clone() },
-            hertz: if field == "hertz" { value.to_string() } else { self.hertz.clone() },
-            kilohertz: if field == "kilohertz" { value.to_string() } else { self.kilohertz.clone() },
-            megahertz: if field == "megahertz" { value.to_string() } else { self.megahertz.clone() },
+            seconds: if field == "seconds" {
+                value.to_string()
+            } else {
+                self.seconds.clone()
+            },
+            milliseconds: if field == "milliseconds" {
+                value.to_string()
+            } else {
+                self.milliseconds.clone()
+            },
+            microseconds: if field == "microseconds" {
+                value.to_string()
+            } else {
+                self.microseconds.clone()
+            },
+            nanoseconds: if field == "nanoseconds" {
+                value.to_string()
+            } else {
+                self.nanoseconds.clone()
+            },
+            hertz: if field == "hertz" {
+                value.to_string()
+            } else {
+                self.hertz.clone()
+            },
+            kilohertz: if field == "kilohertz" {
+                value.to_string()
+            } else {
+                self.kilohertz.clone()
+            },
+            megahertz: if field == "megahertz" {
+                value.to_string()
+            } else {
+                self.megahertz.clone()
+            },
         }
     }
 
@@ -144,13 +181,33 @@ impl TimeConversion {
         }
     }
 
-    pub fn seconds(&self) -> String { self.seconds.clone() }
-    pub fn milliseconds(&self) -> String { self.milliseconds.clone() }
-    pub fn microseconds(&self) -> String { self.microseconds.clone() }
-    pub fn nanoseconds(&self) -> String { self.nanoseconds.clone() }
-    pub fn hertz(&self) -> String { self.hertz.clone() }
-    pub fn kilohertz(&self) -> String { self.kilohertz.clone() }
-    pub fn megahertz(&self) -> String { self.megahertz.clone() }
+    pub fn seconds(&self) -> String {
+        self.seconds.clone()
+    }
+
+    pub fn milliseconds(&self) -> String {
+        self.milliseconds.clone()
+    }
+
+    pub fn microseconds(&self) -> String {
+        self.microseconds.clone()
+    }
+
+    pub fn nanoseconds(&self) -> String {
+        self.nanoseconds.clone()
+    }
+
+    pub fn hertz(&self) -> String {
+        self.hertz.clone()
+    }
+
+    pub fn kilohertz(&self) -> String {
+        self.kilohertz.clone()
+    }
+
+    pub fn megahertz(&self) -> String {
+        self.megahertz.clone()
+    }
 
     fn update_fields(&mut self, time: &Time) {
         self.seconds = format!("{}", time.seconds());

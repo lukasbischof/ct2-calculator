@@ -2,10 +2,10 @@ extern crate num_bigint;
 extern crate num_format;
 extern crate num_traits;
 
-use wasm_bindgen::prelude::*;
+use crate::left_pad_with;
 use num_bigint::BigInt;
 use num_traits::Num;
-use crate::left_pad_with;
+use wasm_bindgen::prelude::*;
 
 #[wasm_bindgen]
 pub fn hex_to_bin(input: &str) -> Option<String> {
@@ -13,10 +13,7 @@ pub fn hex_to_bin(input: &str) -> Option<String> {
         return Some(String::from(""));
     }
 
-    let hex = input
-        .replace(" ", "")
-        .replace("0x", "")
-        .replace("'", "");
+    let hex = input.replace(" ", "").replace("0x", "").replace("'", "");
 
     let x = BigInt::from_str_radix(hex.as_str(), 16);
     if x.is_ok() {

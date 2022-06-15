@@ -1,8 +1,8 @@
 extern crate num_bigint;
 extern crate num_format;
 
-use num_format::{Format, Grouping};
 use num_bigint::{BigInt, Sign};
+use num_format::{Format, Grouping};
 use std::fmt;
 use std::io;
 use std::ops::Neg;
@@ -13,9 +13,9 @@ const MAX_BUF_LEN: usize = 39 + 18 * MAX_SEP_LEN + MAX_MIN_LEN;
 
 #[inline(always)]
 fn io_algorithm<F, W>(s: String, mut w: W, format: &F) -> Result<usize, io::Error>
-    where
-        W: io::Write,
-        F: Format,
+where
+    W: io::Write,
+    F: Format,
 {
     let separator = format.separator().into_str();
     let grouping = format.grouping();
@@ -74,9 +74,9 @@ fn io_algorithm<F, W>(s: String, mut w: W, format: &F) -> Result<usize, io::Erro
 
 #[inline(always)]
 fn fmt_algorithm<F, W>(s: String, mut w: W, format: &F) -> Result<usize, fmt::Error>
-    where
-        W: fmt::Write,
-        F: Format,
+where
+    W: fmt::Write,
+    F: Format,
 {
     let separator = format.separator().into_str();
     let grouping = format.grouping();
@@ -139,20 +139,20 @@ fn fmt_algorithm<F, W>(s: String, mut w: W, format: &F) -> Result<usize, fmt::Er
 pub trait BigIntToFormattedString {
     #[doc(hidden)]
     fn read_to_fmt_writer<F, W>(&self, w: W, format: &F) -> Result<usize, fmt::Error>
-        where
-            F: Format,
-            W: fmt::Write;
+    where
+        F: Format,
+        W: fmt::Write;
 
     #[doc(hidden)]
     fn read_to_io_writer<F, W>(&self, w: W, format: &F) -> Result<usize, io::Error>
-        where
-            F: Format,
-            W: io::Write;
+    where
+        F: Format,
+        W: io::Write;
 
     /// Returns a string representation of the number formatted according to the provided format.
     fn to_formatted_string<F>(&self, format: &F) -> String
-        where
-            F: Format,
+    where
+        F: Format,
     {
         let mut s = String::with_capacity(MAX_BUF_LEN);
         let _ = self.read_to_fmt_writer(&mut s, format).unwrap();
@@ -163,9 +163,9 @@ pub trait BigIntToFormattedString {
 impl BigIntToFormattedString for BigInt {
     #[inline(always)]
     fn read_to_fmt_writer<F, W>(&self, mut w: W, format: &F) -> Result<usize, fmt::Error>
-        where
-            F: Format,
-            W: fmt::Write,
+    where
+        F: Format,
+        W: fmt::Write,
     {
         match self.sign() {
             Sign::Minus => {
@@ -185,9 +185,9 @@ impl BigIntToFormattedString for BigInt {
 
     #[inline(always)]
     fn read_to_io_writer<F, W>(&self, mut w: W, format: &F) -> Result<usize, io::Error>
-        where
-            F: Format,
-            W: io::Write,
+    where
+        F: Format,
+        W: io::Write,
     {
         match self.sign() {
             Sign::Minus => {

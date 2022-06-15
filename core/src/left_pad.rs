@@ -1,7 +1,8 @@
 use std::borrow::{Borrow, Cow};
 
 pub fn left_pad_with<'a, S>(string: S, codepoints: usize, pad_char: char) -> Cow<'a, str>
-    where S: Into<Cow<'a, str>>
+where
+    S: Into<Cow<'a, str>>,
 {
     let cow = string.into();
 

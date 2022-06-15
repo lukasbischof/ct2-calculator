@@ -1,5 +1,5 @@
-use wasm_bindgen::prelude::*;
 use crate::time::Time;
+use wasm_bindgen::prelude::*;
 
 #[wasm_bindgen]
 #[derive(Debug, Clone, Copy)]
@@ -13,19 +13,34 @@ pub struct TimerCounter {
 #[wasm_bindgen]
 impl TimerCounter {
     pub fn new() -> Self {
-        Self { input_frequency: 0, prescaler: 1, arr: 1, effective_arr: 0 }
+        Self {
+            input_frequency: 0,
+            prescaler: 1,
+            arr: 1,
+            effective_arr: 0,
+        }
     }
 
     pub fn updated_input_frequency(&self, input_frequency: u32) -> Self {
-        TimerCounter { input_frequency, ..self.clone() }
+        TimerCounter {
+            input_frequency,
+            ..self.clone()
+        }
     }
 
     pub fn updated_prescaler(&self, prescaler: u32) -> Self {
-        TimerCounter { prescaler, ..self.clone() }
+        TimerCounter {
+            prescaler,
+            ..self.clone()
+        }
     }
 
     pub fn updated_arr(&self, arr: u32) -> Self {
-        TimerCounter { arr, effective_arr: arr - 1, ..self.clone() }
+        TimerCounter {
+            arr,
+            effective_arr: arr - 1,
+            ..self.clone()
+        }
     }
 
     pub fn updated_prescaled_frequency(&self, prescaled_frequency: u32) -> Self {
