@@ -76,7 +76,7 @@ const TimerCounterCalculator: Component = () => {
                  value={() => timerCounter().arr}
                  preprocess={parseInt}
                  onChange={(change) => handleChange('updated_arr', change)} />
-          <div class="form-text">{`Effektiv im ARR = ${timerCounter().effective_arr}`}</div>
+          <div class="form-text">{`Effektiv im ARR Register = ${timerCounter().arr_register_value()}`}</div>
         </FormRow>
         <hr />
         <FormRow label="= Interrupt Period" labelFor="interrupt_period">

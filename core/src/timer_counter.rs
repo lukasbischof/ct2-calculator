@@ -7,7 +7,6 @@ pub struct TimerCounter {
     pub input_frequency: u32,
     pub prescaler: u32,
     pub arr: u32,
-    pub effective_arr: u32,
 }
 
 #[wasm_bindgen]
@@ -17,7 +16,6 @@ impl TimerCounter {
             input_frequency: 0,
             prescaler: 1,
             arr: 1,
-            effective_arr: 0,
         }
     }
 
@@ -38,7 +36,6 @@ impl TimerCounter {
     pub fn updated_arr(&self, arr: u32) -> Self {
         TimerCounter {
             arr,
-            effective_arr: arr - 1,
             ..self.clone()
         }
     }
@@ -48,14 +45,14 @@ impl TimerCounter {
     }
 
     pub fn updated_interrupt_frequency(&self, interrupt_frequency: u32) -> Self {
-        self.updated_arr((self.prescaled_frequency() / interrupt_frequency) + 1)
+        self.updated_arr(self.prescaled_frequency() / interrupt_frequency)
     }
 
     pub fn updated_interrupt_period(&self, interrupt_period_ms: u32) -> Self {
         let prescaler_time = Time::from_hertz(self.prescaled_frequency() as f64).milliseconds();
         let x = interrupt_period_ms as f64 / prescaler_time;
 
-        self.updated_arr((x as u32) + 1)
+        self.updated_arr(x as u32)
     }
 
     pub fn prescaled_frequency(&self) -> u32 {
@@ -63,11 +60,15 @@ impl TimerCounter {
     }
 
     pub fn interrupt_frequency(&self) -> f64 {
-        if self.effective_arr == 0 {
+        if self.arr == 0 {
             return 0.0;
         }
 
-        self.prescaled_frequency() as f64 / self.effective_arr as f64
+        self.prescaled_frequency() as f64 / self.arr as f64
+    }
+
+    pub fn arr_register_value(&self) -> u32 {
+        self.arr - 1
     }
 
     pub fn interrupt_period_ms(&self) -> f64 {

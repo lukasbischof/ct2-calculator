@@ -5,7 +5,6 @@ extern crate num_traits;
 use crate::big_int::BigIntToFormattedString;
 use num_bigint::BigInt;
 use num_format::{Locale, ToFormattedString};
-use num_traits::Num;
 use wasm_bindgen::prelude::*;
 
 #[wasm_bindgen]
