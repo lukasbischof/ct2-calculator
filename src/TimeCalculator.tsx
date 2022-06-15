@@ -1,5 +1,5 @@
 import { Component, createSignal, onCleanup } from 'solid-js';
-import { Time } from 'ct2-calculator/ct2_calculator';
+import { Time, TimeConversion } from 'ct2-calculator/ct2_calculator';
 import Input from './Input';
 
 function FormRow({ label, labelFor, children }: { label: string, labelFor: string, children: any }) {
@@ -13,28 +13,11 @@ function FormRow({ label, labelFor, children }: { label: string, labelFor: strin
   );
 }
 
-const timeFromKey = (key: keyof Time, value: number): Time => {
-  switch (key) {
-    case 'seconds':
-      return Time.from_seconds(value);
-    case 'milliseconds':
-      return Time.from_milliseconds(value);
-    case 'microseconds':
-      return Time.from_microseconds(value);
-    case 'nanoseconds':
-      return Time.from_nanoseconds(value);
-    case 'hertz':
-      return Time.from_hertz(value);
-    default:
-      throw new Error(`Unknown key: ${key}`);
-  }
-};
-
 const TimeCalculator: Component = () => {
-  const [time, setTime] = createSignal<Time>(Time.from_seconds(0));
+  const [time, setTime] = createSignal<TimeConversion>(TimeConversion.new(Time.from_seconds(0)));
 
-  const convert = (key: keyof Time, value: number) => {
-    setTime(timeFromKey(key, value));
+  const convert = (key: keyof Time, value: string) => {
+    setTime(time().update(key, value));
   };
 
   onCleanup(() => time().free());
@@ -44,45 +27,54 @@ const TimeCalculator: Component = () => {
       <h1>Zeitrechner</h1>
       <form>
         <FormRow label="Sekunden" labelFor={'seconds'}>
-          <Input type="number"
-                 step="0.00000000001"
-                 class="form-control"
-                 id="seconds"
-                 value={() => time().seconds}
-                 preprocess={parseFloat}
-                 onChange={(change) => convert('seconds', change)} />
+          <Input<string> type="text"
+                         step="0.00000000001"
+                         class="form-control"
+                         id="seconds"
+                         value={() => time().seconds()}
+                         onChange={(change) => convert('seconds', change)} />
         </FormRow>
         <FormRow label="Millisekunden" labelFor="milliseconds">
-          <Input type="number"
-                 class="form-control"
-                 id="milliseconds"
-                 value={() => time().milliseconds}
-                 preprocess={parseFloat}
-                 onChange={change => convert('milliseconds', change)} />
+          <Input<string> type="text"
+                         class="form-control"
+                         id="milliseconds"
+                         value={() => time().milliseconds()}
+                         onChange={change => convert('milliseconds', change)} />
         </FormRow>
         <FormRow label="Mikrosekunden" labelFor="microseconds">
-          <Input type="number"
-                 class="form-control"
-                 id="microseconds"
-                 value={() => time().microseconds}
-                 preprocess={parseFloat}
-                 onChange={change => convert('microseconds', change)} />
+          <Input<string> type="text"
+                         class="form-control"
+                         id="microseconds"
+                         value={() => time().microseconds()}
+                         onChange={change => convert('microseconds', change)} />
         </FormRow>
         <FormRow label="Nanosekunden" labelFor="nanoseconds">
-          <Input type="number"
-                 class="form-control"
-                 id="nanoseconds"
-                 value={() => time().nanoseconds}
-                 preprocess={parseFloat}
-                 onChange={change => convert('nanoseconds', change)} />
+          <Input<string> type="text"
+                         class="form-control"
+                         id="nanoseconds"
+                         value={() => time().nanoseconds()}
+                         onChange={change => convert('nanoseconds', change)} />
         </FormRow>
         <FormRow label="Hertz" labelFor="hertz">
-          <Input type="number"
-                 class="form-control"
-                 id="hertz"
-                 value={() => time().hertz}
-                 preprocess={parseFloat}
-                 onChange={change => convert('hertz', change)} />
+          <Input<string> type="text"
+                         class="form-control"
+                         id="hertz"
+                         value={() => time().hertz()}
+                         onChange={change => convert('hertz', change)} />
+        </FormRow>
+        <FormRow label="Kilohertz" labelFor="kilohertz">
+          <Input<string> type="text"
+                         class="form-control"
+                         id="kilohertz"
+                         value={() => time().kilohertz()}
+                         onChange={change => convert('kilohertz', change)} />
+        </FormRow>
+        <FormRow label="Megahertz" labelFor="megahertz">
+          <Input<string> type="text"
+                         class="form-control"
+                         id="megahertz"
+                         value={() => time().megahertz()}
+                         onChange={change => convert('megahertz', change)} />
         </FormRow>
       </form>
     </div>

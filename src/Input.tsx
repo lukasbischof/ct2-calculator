@@ -9,10 +9,23 @@ type Props<T> = {
 };
 
 function Input<T>({ value, onChange, ...props }: Props<T> & OtherProps) {
+  const preprocess = (input: any) => {
+    if (props.preprocess) {
+      let result = props.preprocess(input);
+      if (result === undefined || (typeof result === 'number' && isNaN(result))) {
+        return input;
+      }
+
+      return result;
+    }
+
+    return input;
+  };
+
   return (
     <input value={typeof value === 'function' ? value() : value}
            onInput={v => {
-             onChange(props.preprocess ? props.preprocess(v.currentTarget.value) : v.currentTarget.value as unknown as T);
+             onChange(preprocess(v.currentTarget.value) as unknown as T);
            }}
            {...props}
     />

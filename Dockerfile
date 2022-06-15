@@ -16,4 +16,3 @@ RUN pnpm install
 COPY --from=wasm-build /usr/src/core/pkg ./core/pkg
 
 RUN pnpm run build
-

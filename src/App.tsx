@@ -2,19 +2,20 @@ import type { Component } from 'solid-js';
 
 import styles from './App.module.css';
 import { NavLink, Route, Routes } from 'solid-app-router';
-import { lazy, onMount } from 'solid-js';
+import { createSignal, lazy, onMount, Show } from 'solid-js';
 import useSuspense from './useSuspense';
+import init from 'ct2-calculator';
 
 const Binary = lazy(() => import('./Binary'));
 const Powers = lazy(() => import('./Powers'));
 const TimeCalculator = lazy(() => import('./TimeCalculator'));
 
-import init from 'ct2-calculator';
-
 const App: Component = () => {
+  const [isReady, setIsReady] = createSignal(false);
+
   onMount(() => {
     init().then(() => {
-      console.log('init done');
+      setIsReady(true);
     });
   });
 
@@ -27,12 +28,14 @@ const App: Component = () => {
           <NavLink class="flex-sm-fill text-sm-center nav-link" href="/time">Zeit</NavLink>
         </nav>
 
-        <Routes>
-          <Route path="/" element={<h1>Choose your calc</h1>} />
-          <Route path="/powers" element={useSuspense(Powers)}></Route>
-          <Route path="/bin" element={useSuspense(Binary)}></Route>
-          <Route path="/time" element={useSuspense(TimeCalculator)}></Route>
-        </Routes>
+        <Show when={isReady}>
+          <Routes>
+            <Route path="/" element={<h1>Choose your calc</h1>} />
+            <Route path="/powers" element={useSuspense(Powers)}></Route>
+            <Route path="/bin" element={useSuspense(Binary)}></Route>
+            <Route path="/time" element={useSuspense(TimeCalculator)}></Route>
+          </Routes>
+        </Show>
       </div>
     </div>
   );
