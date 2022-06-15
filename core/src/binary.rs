@@ -29,6 +29,23 @@ pub fn hex_to_bin(input: &str) -> Option<String> {
     }
 }
 
+#[wasm_bindgen]
+pub fn bin_to_hex(input: &str) -> Option<String> {
+    if input.len() == 0 {
+        return Some(String::from(""));
+    }
+
+    let bin = input.replace(" ", "");
+
+    let x = BigInt::from_str_radix(bin.as_str(), 2);
+    if x.is_ok() {
+        let hex = x.unwrap().to_str_radix(16).to_string();
+        Some(format!("0x{}", hex))
+    } else {
+        None
+    }
+}
+
 fn fmt_binary_string(binary_string: &String, pad_str: bool) -> String {
     const BITS_PER_GROUP: usize = 4;
 

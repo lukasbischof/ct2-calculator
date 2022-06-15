@@ -23,20 +23,3 @@ pub fn power2(exp: u32) -> String {
         x.pow(exp).to_formatted_string(&Locale::de_CH)
     }
 }
-
-#[wasm_bindgen]
-pub fn bin_to_hex(input: &str) -> Option<String> {
-    if input.len() == 0 {
-        return Some(String::from(""));
-    }
-
-    let bin = input.replace(" ", "");
-
-    let x = BigInt::from_str_radix(bin.as_str(), 2);
-    if x.is_ok() {
-        let hex = x.unwrap().to_str_radix(16).to_string();
-        Some(format!("0x{}", hex))
-    } else {
-        None
-    }
-}
