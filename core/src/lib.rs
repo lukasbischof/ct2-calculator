@@ -5,13 +5,13 @@ extern crate wasm_bindgen;
 
 use wasm_bindgen::prelude::*;
 
+mod adc;
 mod big_int;
 mod binary;
 mod left_pad;
 mod power;
 mod time;
 mod timer_counter;
-mod adc;
 
 use crate::left_pad::left_pad_with;
 
