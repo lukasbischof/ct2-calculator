@@ -1,5 +1,6 @@
 use wasm_bindgen::prelude::*;
 use crate::time::Time;
+use crate::warn;
 
 #[wasm_bindgen]
 #[derive(Debug, Clone, Copy)]
@@ -29,6 +30,11 @@ impl ADCTiming {
     }
 
     pub fn updated_prescaler(&self, prescaler: u32) -> Self {
+        if prescaler <= 0 {
+            warn("ADCTiming: prescaler cannot be 0");
+            return self.clone();
+        }
+
         ADCTiming {
             prescaler,
             ..self.clone()
@@ -36,6 +42,11 @@ impl ADCTiming {
     }
 
     pub fn updated_sample_time_cycles(&self, sample_time_cycles: u16) -> Self {
+        if sample_time_cycles <= 0 && self.conversion_time_cycles <= 0 {
+            warn("ADCTiming: sample_time_cycles cannot be 0 when conversion_time_cycles is already 0");
+            return self.clone();
+        }
+
         ADCTiming {
             sample_time_cycles,
             ..self.clone()
@@ -43,6 +54,11 @@ impl ADCTiming {
     }
 
     pub fn updated_conversion_time_cycles(&self, conversion_time_cycles: u16) -> Self {
+        if conversion_time_cycles <= 0 && self.sample_time_cycles <= 0 {
+            warn("ADCTiming: conversion_time_cycles cannot be 0 when sample_time_cycles is already 0");
+            return self.clone();
+        }
+
         ADCTiming {
             conversion_time_cycles,
             ..self.clone()

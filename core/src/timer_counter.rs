@@ -1,5 +1,6 @@
 use crate::time::Time;
 use wasm_bindgen::prelude::*;
+use crate::warn;
 
 #[wasm_bindgen]
 #[derive(Debug, Clone, Copy)]
@@ -27,6 +28,11 @@ impl TimerCounter {
     }
 
     pub fn updated_prescaler(&self, prescaler: u32) -> Self {
+        if prescaler <= 0 {
+            warn("TimerCounter: prescaler cannot be 0");
+            return self.clone();
+        }
+
         TimerCounter {
             prescaler,
             ..self.clone()
