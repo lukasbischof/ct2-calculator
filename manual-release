@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+echo "Building..."
+pnpm run wasm:build
+pnpm run build
+
+echo "Deploying..."
+DEPLOY_PATH=/tmp/ct2-calc-release
+git clone -b gh-pages git@github.com:lukasbischof/ct2-calculator.git $DEPLOY_PATH
+cp dist/* $DEPLOY_PATH
+rm -rf $DEPLOY_PATH/assets
+mkdir -p $DEPLOY_PATH/assets
+cp -f dist/assets/* "$DEPLOY_PATH/assets/"
+
+cd $DEPLOY_PATH || exit 1
+git add .
+git status
+echo "Do you want to proceed? (y/n)"
+read -r proceed
+case "$proceed" in
+  [Yy]*)
+    git commit -m "Release"
+    git push -f
+    ;;
+  *)
+    echo "Aborting..."
+    ;;
+esac
+
+echo "Cleaning..."
+rm -rf $DEPLOY_PATH
