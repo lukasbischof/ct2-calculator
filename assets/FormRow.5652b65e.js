@@ -1,1 +1,0 @@
-import{l as a,i as e,t as c}from"./index.16ac85fd.js";const n=c('<div class="row mb-3"><label class="col-sm-2 col-form-label"></label><div class="col-sm-10"></div></div>');function b({label:s,labelFor:o,children:r}){return(()=>{const t=n.cloneNode(!0),l=t.firstChild,i=l.nextSibling;return a(l,"for",o),e(l,s),e(i,r),t})()}export{b as F};
