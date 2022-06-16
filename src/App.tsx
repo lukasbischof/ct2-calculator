@@ -16,9 +16,7 @@ const App: Component = () => {
   const [isReady, setIsReady] = createSignal(false);
 
   onMount(() => {
-    init().then(() => {
-      setIsReady(true);
-    });
+    init().then(() => setIsReady(true));
   });
 
   return (
